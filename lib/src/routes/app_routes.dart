@@ -3,6 +3,6 @@ abstract class Routes{
 
   static const INITIAL = '/';
   static const SPLASH = '/slpash';
-  static const LOGIN = '/login';
+  static const AUTHENTICATION = '/authentication';
   static const CADASTRO = '/cadastro';
 }
