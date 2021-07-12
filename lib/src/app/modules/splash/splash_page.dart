@@ -6,14 +6,9 @@ class SplashPage extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              color: Color(0xFFBBC6D7),
-            ),
-          ),
-        ],
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: Center(
+        child: Image.asset('assets/images/logo.png'),
       ),
     );
   }

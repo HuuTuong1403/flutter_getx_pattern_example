@@ -11,7 +11,8 @@ class AuthenticationPaeg extends StatefulWidget {
 }
 
 class _AuthenticationPaegState extends State<AuthenticationPaeg> {
-  int _formIndex = 1;
+  int _formIndex = 0;
+  PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +55,17 @@ class _AuthenticationPaegState extends State<AuthenticationPaeg> {
                             'LOGIN',
                             style: TextStyle(
                               color:
-                                  _formIndex == 1 ? Colors.white : inactiveTab,
+                                  _formIndex == 0 ? Colors.white : inactiveTab,
                               fontSize: 18,
                             ),
                           ),
                           onPressed: () {
                             setState(() {
-                              _formIndex = 1;
+                              _formIndex = 0;
+                              FocusScope.of(context).unfocus();
+                              _pageController.animateToPage(0,
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.ease);
                             });
                           },
                         ),
@@ -69,13 +74,17 @@ class _AuthenticationPaegState extends State<AuthenticationPaeg> {
                             'SIGNUP',
                             style: TextStyle(
                               color:
-                                  _formIndex == 1 ? inactiveTab : Colors.white,
+                                  _formIndex == 0 ? inactiveTab : Colors.white,
                               fontSize: 18,
                             ),
                           ),
                           onPressed: () {
                             setState(() {
-                              _formIndex = 2;
+                              _formIndex = 1;
+                              FocusScope.of(context).unfocus();
+                              _pageController.animateToPage(1,
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.ease);
                             });
                           },
                         )
@@ -92,7 +101,16 @@ class _AuthenticationPaegState extends State<AuthenticationPaeg> {
                           topRight: Radius.circular(40),
                         ),
                       ),
-                      child: _formIndex == 1 ? LoginPage() : SignUpPage(),
+                      child: PageView(
+                        onPageChanged: (index) {
+                          setState(() {
+                            _formIndex = index;
+                            FocusScope.of(context).unfocus();
+                          });
+                        },
+                        controller: _pageController,
+                        children: [LoginPage(), SignUpPage()],
+                      ),
                     ),
                   ),
                 ]),
