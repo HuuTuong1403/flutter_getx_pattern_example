@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                             if (check) {
                               _emailController.clear();
                               _passwordController.clear();
-                              Get.offAndToNamed(Routes.HOME);
+                              Get.offAndToNamed(Routes.NAVIGATION);
                             }
                           }
                         },
@@ -178,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (check) {
                           _emailController.clear();
                           _passwordController.clear();
-                          Get.offAndToNamed(Routes.HOME);
+                          Get.offAndToNamed(Routes.NAVIGATION);
                         }
                       }
                     },

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_pattern/src/app/modules/home/home_controller.dart';
-import 'package:flutter_getx_pattern/src/app/modules/splash/widgets/category_items_widget.dart';
-import 'package:flutter_getx_pattern/src/app/modules/splash/widgets/lastest_news_item_widget.dart';
-import 'package:flutter_getx_pattern/src/app/modules/splash/widgets/story_items_widget.dart';
+import 'package:flutter_getx_pattern/src/app/modules/home/widgets/category_items_widget.dart';
+import 'package:flutter_getx_pattern/src/app/modules/home/widgets/lastest_news_item_widget.dart';
+import 'package:flutter_getx_pattern/src/app/modules/home/widgets/story_items_widget.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:get/get.dart';
 

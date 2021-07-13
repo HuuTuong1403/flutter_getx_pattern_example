@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_pattern/src/routes/app_pages.dart';
+import 'package:get/get.dart';
 
 class StoryItemsWidget extends StatefulWidget {
   StoryItemsWidget({Key? key}) : super(key: key);
@@ -11,7 +13,9 @@ class _StoryItemsWidgetState extends State<StoryItemsWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.STORIES);
+      },
       child: Column(
         children: [
           Stack(

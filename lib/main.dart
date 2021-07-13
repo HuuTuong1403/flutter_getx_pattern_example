@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_pattern/src/app/modules/splash/splash_page.dart';
-import 'package:flutter_getx_pattern/src/app/modules/user_state/user_state.dart';
 import 'package:flutter_getx_pattern/src/core/theme/theme_service.dart';
 import 'package:flutter_getx_pattern/src/core/theme/themes.dart';
 import 'package:flutter_getx_pattern/src/routes/app_pages.dart';
@@ -22,9 +21,8 @@ class App extends StatelessWidget {
     return FutureBuilder(
       future: _initialization,
       builder: (context, snapshot) {
-        print('${snapshot.connectionState}');
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return GetMaterialApp(
+          return MaterialApp(
             home: SplashPage(),
           );
         } else if (snapshot.hasError) {
@@ -38,22 +36,12 @@ class App extends StatelessWidget {
         }
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.INITIAL,
+          initialRoute: Routes.ROOT,
           theme: Themes().lightTheme,
           darkTheme: Themes().darkTheme,
           themeMode: ThemeService().getThemeMode(),
           defaultTransition: Transition.fade,
           getPages: AppPages.pages,
-          home: FutureBuilder(
-            future: Future.delayed(Duration(seconds: 1)),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return SplashPage();
-              } else {
-                return UserState();
-              }
-            },
-          ),
         );
       },
     );
