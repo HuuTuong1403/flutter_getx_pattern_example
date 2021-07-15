@@ -2,6 +2,7 @@ import 'package:flutter_getx_pattern/src/app.dart';
 import 'package:flutter_getx_pattern/src/app/modules/authentication/authentication_page.dart';
 import 'package:flutter_getx_pattern/src/app/modules/authentication/login/login_page.dart';
 import 'package:flutter_getx_pattern/src/app/modules/authentication/signup/signup_page.dart';
+import 'package:flutter_getx_pattern/src/app/modules/menu/menu_page.dart';
 import 'package:flutter_getx_pattern/src/app/modules/navigation/navigation_page.dart';
 import 'package:flutter_getx_pattern/src/app/modules/splash/splash_page.dart';
 import 'package:flutter_getx_pattern/src/app/modules/stories/stories_detail_page.dart';
@@ -37,6 +38,11 @@ class AppPages {
     GetPage(
       name: Routes.STORIES,
       page: () => StoriesDetailPage(),
+      children: [],
+    ),
+    GetPage(
+      name: Routes.MENU,
+      page: () => MenuPage(),
       children: [],
     ),
   ];

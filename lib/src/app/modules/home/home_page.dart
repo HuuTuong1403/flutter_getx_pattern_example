@@ -13,9 +13,31 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  Animation? _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    _animation = Tween(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    _controller.forward();
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (_) {
@@ -61,74 +83,77 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(left: 30),
-                  height: 150,
-                  width: double.infinity,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return StoryItemsWidget();
-                    },
+          body: FadeTransition(
+            opacity: _controller,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(left: 30),
+                    height: 150,
+                    width: double.infinity,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return StoryItemsWidget();
+                      },
+                    ),
                   ),
-                ),
-                Container(
-                  height: 276,
-                  width: double.infinity,
-                  child: Swiper(
-                    itemCount: 10,
-                    scrollDirection: Axis.horizontal,
-                    scale: 0.9,
-                    viewportFraction: 0.75,
-                    loop: false,
-                    itemBuilder: (context, index) {
-                      return CategoryItemsWidget();
-                    },
+                  Container(
+                    height: 276,
+                    width: double.infinity,
+                    child: Swiper(
+                      itemCount: 10,
+                      scrollDirection: Axis.horizontal,
+                      scale: 0.9,
+                      viewportFraction: 0.75,
+                      loop: false,
+                      itemBuilder: (context, index) {
+                        return CategoryItemsWidget();
+                      },
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Lastest News',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Theme.of(context).textTheme.headline1!.color,
-                          fontWeight: FontWeight.bold,
+                  Padding(
+                    padding: const EdgeInsets.all(30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Lastest News',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Theme.of(context).textTheme.headline1!.color,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'More',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(context).textTheme.bodyText2!.color,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      )
-                    ],
+                        Text(
+                          'More',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).textTheme.bodyText2!.color,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  padding:
-                      const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-                  width: double.infinity,
-                  height: 170 * 10,
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return LastestNewsItemWidget();
-                    },
+                  Container(
+                    padding:
+                        const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+                    width: double.infinity,
+                    height: 170 * 10,
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return LastestNewsItemWidget();
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

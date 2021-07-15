@@ -31,6 +31,11 @@ class _UploadBlogPageState extends State<UploadBlogPage> {
   bool active = false;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _articleTitleFocus.dispose();
     _articleSubTitleFocus.dispose();
@@ -47,6 +52,7 @@ class _UploadBlogPageState extends State<UploadBlogPage> {
     return GetBuilder<UploadBlogController>(
       init: UploadBlogController(),
       builder: (controller) {
+        _buildListTags();
         return GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
@@ -80,13 +86,39 @@ class _UploadBlogPageState extends State<UploadBlogPage> {
                   ),
                   child: Material(
                     color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () {},
-                      splashColor: Colors.grey.shade200,
-                      child: Icon(
-                        Icons.download,
-                        color: Theme.of(context).textTheme.headline1!.color,
-                        size: 32,
+                    child: Tooltip(
+                      message: 'Upload Blog',
+                      child: InkWell(
+                        onTap: () async {
+                          var isValid = _formKey.currentState!.validate();
+                          if (isValid) {
+                            _formKey.currentState!.save();
+                            var check = await controller.uploadBlog(
+                                _articleTitle,
+                                _articleSubTitle,
+                                'Art',
+                                _articleContent);
+                            if (check) {
+                              Get.snackbar(
+                                  'Notifications', 'Upload Blog Success');
+                              _articleTitleController.clear();
+                              _articleSubTitleController.clear();
+                              _articleContentController.clear();
+                              controller.removeImage();
+                            }
+                          }
+                        },
+                        splashColor: Colors.grey.shade200,
+                        child: Obx(() => controller.isLoading.value
+                            ? CircularProgressIndicator()
+                            : Icon(
+                                Icons.upload,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .headline1!
+                                    .color,
+                                size: 32,
+                              )),
                       ),
                     ),
                   ),
@@ -124,6 +156,12 @@ class _UploadBlogPageState extends State<UploadBlogPage> {
                       TextFormField(
                         key: ValueKey('ArticleTitle'),
                         focusNode: _articleTitleFocus,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Title Blog is not empty';
+                          }
+                          return null;
+                        },
                         controller: _articleTitleController,
                         style: TextStyle(
                           fontSize: 22,
@@ -151,6 +189,12 @@ class _UploadBlogPageState extends State<UploadBlogPage> {
                           key: ValueKey('ArticleSubTitle'),
                           focusNode: _articleSubTitleFocus,
                           controller: _articleSubTitleController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter sub title blog';
+                            }
+                            return null;
+                          },
                           style: TextStyle(
                             fontSize: 18,
                             color: Theme.of(context).textTheme.headline1!.color,
@@ -175,6 +219,7 @@ class _UploadBlogPageState extends State<UploadBlogPage> {
                       ),
                       const SizedBox(height: 10),
                       Wrap(
+                        spacing: 5,
                         children: [
                           Chip(
                             backgroundColor: Colors.transparent,
@@ -186,30 +231,7 @@ class _UploadBlogPageState extends State<UploadBlogPage> {
                                   Theme.of(context).textTheme.bodyText2!.color,
                             ),
                           ),
-                          Chip(
-                            backgroundColor: Colors.transparent,
-                            label: Text('Art'),
-                            deleteIcon: Icon(
-                              Icons.cancel,
-                              color:
-                                  Theme.of(context).textTheme.bodyText2!.color,
-                            ),
-                            labelStyle: TextStyle(
-                              fontSize: 14,
-                              color:
-                                  Theme.of(context).textTheme.bodyText2!.color,
-                            ),
-                            onDeleted: () {
-                              print('delete');
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(75),
-                              side: BorderSide(
-                                color: Colors.blue,
-                                width: 2,
-                              ),
-                            ),
-                          ),
+                          ...list
                         ],
                       ),
                       const SizedBox(height: 10),
@@ -248,6 +270,12 @@ class _UploadBlogPageState extends State<UploadBlogPage> {
                             key: ValueKey('ArticleContent'),
                             focusNode: _articleContentFocus,
                             controller: _articleContentController,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter content blog';
+                              }
+                              return null;
+                            },
                             style: TextStyle(
                               fontSize: 14,
                               color:
@@ -430,5 +458,32 @@ class _UploadBlogPageState extends State<UploadBlogPage> {
         );
       },
     );
+  }
+
+  var listString = ['Art', 'Culture', 'Design', 'Production'];
+  var list = [];
+  void _buildListTags() {
+    list = listString.map((e) {
+      return Chip(
+        backgroundColor: Colors.transparent,
+        label: Text(e),
+        deleteIcon: Icon(
+          Icons.cancel,
+          color: Theme.of(context).textTheme.bodyText2!.color,
+        ),
+        labelStyle: TextStyle(
+          fontSize: 14,
+          color: Theme.of(context).textTheme.bodyText2!.color,
+        ),
+        onDeleted: () {},
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(75),
+          side: BorderSide(
+            color: Colors.blue,
+            width: 2,
+          ),
+        ),
+      );
+    }).toList();
   }
 }
