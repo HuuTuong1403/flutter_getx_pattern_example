@@ -9,4 +9,6 @@ abstract class Routes {
   static const NAVIGATION = '/navigation';
   static const STORIES = '/stories';
   static const MENU = '/menu';
+  static const DETAILBLOG = '/detailblog';
+  static const PROFILE = '/profile';
 }

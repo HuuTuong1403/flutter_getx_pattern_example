@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_pattern/src/app/modules/menu/widgets/my_post_item.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_getx_pattern/src/app/modules/menu/profile/profile_controller.dart';
+import 'package:flutter_getx_pattern/src/app/modules/menu/profile/widgets/my_post_item.dart';
+import 'package:get/get.dart';
 
 class MyPostWidget extends StatefulWidget {
   MyPostWidget({Key? key}) : super(key: key);
@@ -10,6 +11,12 @@ class MyPostWidget extends StatefulWidget {
 }
 
 class _MyPostWidgetState extends State<MyPostWidget> {
+  ProfileController _blogController = Get.find();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,13 +58,16 @@ class _MyPostWidgetState extends State<MyPostWidget> {
             ),
             const SizedBox(height: 10),
             Container(
-              padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-              width: double.infinity,
-              height: 170 * 10,
+              height: MediaQuery.of(context).size.height *
+                  0.22 *
+                  _blogController.listBlog.length,
               child: ListView.builder(
-                itemCount: 10,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _blogController.listBlog.length,
                 itemBuilder: (context, index) {
-                  return MyPostWidget();
+                  return MyPostItemWidget(
+                      blog: _blogController.listBlog[index]);
                 },
               ),
             ),

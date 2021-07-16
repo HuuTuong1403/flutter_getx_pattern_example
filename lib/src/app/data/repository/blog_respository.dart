@@ -56,4 +56,10 @@ class BlogRespository {
     });
     return _listBlog;
   }
+
+  Future<List<Blog>> fetchBlogOfUser() async {
+    var list = await fetchBlog();
+    String id = _auth.currentUser!.uid;
+    return list.where((item) => item.userId == id).toList();
+  }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_getx_pattern/src/app/modules/upload_blog/upload_blog_controller.dart';
-import 'package:flutter_getx_pattern/src/app/modules/upload_blog/widgets/file_picker.dart';
-import 'package:flutter_getx_pattern/src/app/modules/upload_blog/widgets/image_pick.dart';
+import 'package:flutter_getx_pattern/src/app/modules/blog/upload_blog/upload_blog_controller.dart';
+import 'package:flutter_getx_pattern/src/app/modules/blog/upload_blog/widgets/file_picker.dart';
+import 'package:flutter_getx_pattern/src/app/modules/blog/upload_blog/widgets/image_pick.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 

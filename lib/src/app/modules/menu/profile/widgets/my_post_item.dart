@@ -4,39 +4,21 @@ import 'package:flutter_getx_pattern/src/routes/app_pages.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class LastestNewsItemWidget extends StatefulWidget {
+class MyPostItemWidget extends StatelessWidget {
   final Blog blog;
-  LastestNewsItemWidget({Key? key, required this.blog}) : super(key: key);
+  const MyPostItemWidget({Key? key, required this.blog}) : super(key: key);
 
-  @override
-  _LastestNewsItemWidgetState createState() => _LastestNewsItemWidgetState();
-}
-
-class _LastestNewsItemWidgetState extends State<LastestNewsItemWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      height: 150,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(0, 2),
-            blurRadius: 5,
-          )
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {
-            Get.toNamed(Routes.DETAILBLOG, arguments: [widget.blog]);
-          },
-          splashColor: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(16),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        splashColor: Colors.grey.shade200,
+        onTap: () {
+          Get.toNamed(Routes.DETAILBLOG, arguments: [blog]);
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 10.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -48,7 +30,7 @@ class _LastestNewsItemWidgetState extends State<LastestNewsItemWidget> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     image: DecorationImage(
-                      image: NetworkImage('${widget.blog.image}'),
+                      image: NetworkImage('${blog.image}'),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -62,7 +44,7 @@ class _LastestNewsItemWidgetState extends State<LastestNewsItemWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${widget.blog.title}',
+                        '${blog.title}',
                         style: TextStyle(
                           fontSize: 14,
                           color: Theme.of(context).textTheme.bodyText2!.color,
@@ -71,8 +53,10 @@ class _LastestNewsItemWidgetState extends State<LastestNewsItemWidget> {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        '${widget.blog.subTitle}',
+                        '${blog.subTitle}',
                         textAlign: TextAlign.left,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 14,
                           color: Theme.of(context).textTheme.headline1!.color,
@@ -126,12 +110,13 @@ class _LastestNewsItemWidgetState extends State<LastestNewsItemWidget> {
                               ),
                             ],
                           ),
-                          Icon(Icons.bookmark_rounded,
-                              size: 18,
-                              color:
-                                  Theme.of(context).textTheme.bodyText1!.color),
+                          Icon(
+                            Icons.bookmark_rounded,
+                            size: 18,
+                            color: Theme.of(context).textTheme.bodyText2!.color,
+                          ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),

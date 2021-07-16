@@ -5,15 +5,14 @@ import 'package:flutter_getx_pattern/src/app/data/repository/blog_respository.da
 import 'package:flutter_getx_pattern/src/app/data/repository/user_respository.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
-  BlogRespository _blogRespository = BlogRespository();
+class ProfileController extends GetxController {
+  BlogRespository _respository = BlogRespository();
   UserRepository _userRepository = UserRepository();
-
   bool isLoading = true;
-
   List<Blog> listBlog = [];
-  fetchBlog() async {
-    listBlog = await _blogRespository.fetchBlog();
+  fetchBlogOfUser() async {
+    listBlog = await _respository.fetchBlogOfUser();
+    isLoading = false;
     update();
   }
 

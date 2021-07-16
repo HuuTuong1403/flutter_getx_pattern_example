@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_pattern/src/app/data/repository/authentication/authentication_respository.dart';
+import 'package:flutter_getx_pattern/src/app/data/repository/authentication_respository.dart';
 import 'package:get/get.dart';
 
 class LogInPageController extends GetxController {
