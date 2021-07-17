@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_pattern/src/app/modules/menu/menu_controller.dart';
 import 'package:flutter_getx_pattern/src/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -44,81 +45,133 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: Stack(children: [
-        CustomScrollView(
-          controller: _scrollController,
-          slivers: [
-            SliverAppBar(
-              automaticallyImplyLeading: true,
-              elevation: 4,
-              expandedHeight: 200,
-              pinned: true,
-              flexibleSpace: LayoutBuilder(
-                builder: (context, constraints) {
-                  top = constraints.biggest.height;
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: FlexibleSpaceBar(
-                      collapseMode: CollapseMode.parallax,
-                      centerTitle: true,
-                      title: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          AnimatedOpacity(
-                            opacity: top <= 110.0 ? 1 : 0,
-                            duration: Duration(milliseconds: 300),
-                            child: Row(
+    return GetBuilder<MenuController>(
+        init: MenuController(),
+        builder: (controller) {
+          return Scaffold(
+            backgroundColor: Theme.of(context).primaryColor,
+            body: Stack(children: [
+              CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  SliverAppBar(
+                    automaticallyImplyLeading: true,
+                    elevation: 4,
+                    expandedHeight: 200,
+                    pinned: true,
+                    flexibleSpace: LayoutBuilder(
+                      builder: (context, constraints) {
+                        top = constraints.biggest.height;
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: FlexibleSpaceBar(
+                            collapseMode: CollapseMode.parallax,
+                            centerTitle: true,
+                            title: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                SizedBox(width: 12),
-                                Container(
-                                  height: kToolbarHeight / 1.8,
-                                  width: kToolbarHeight / 1.8,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.white, blurRadius: 1)
+                                AnimatedOpacity(
+                                  opacity: top <= 110.0 ? 1 : 0,
+                                  duration: Duration(milliseconds: 300),
+                                  child: Row(
+                                    children: <Widget>[
+                                      SizedBox(width: 12),
+                                      Container(
+                                        height: kToolbarHeight / 1.8,
+                                        width: kToolbarHeight / 1.8,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.white,
+                                                blurRadius: 1)
+                                          ],
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage(
+                                                'assets/images/imageTitle1.png'),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 12),
+                                      Text("Tuong",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white))
                                     ],
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          'assets/images/imageTitle1.png'),
-                                    ),
                                   ),
                                 ),
-                                SizedBox(width: 12),
-                                Text("Tuong",
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white))
                               ],
                             ),
+                            background: Image(
+                              image:
+                                  AssetImage('assets/images/imageStories.png'),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ],
-                      ),
-                      background: Image(
-                        image: AssetImage('assets/images/imageStories.png'),
-                        fit: BoxFit.cover,
-                      ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  _buildListTileMenu(
-                      title: 'Profile', icon: Icons.person, tabIndex: 0)
+                  ),
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        _buildListTileMenu(
+                            title: 'Profile', icon: Icons.person, tabIndex: 0),
+                        _buildListTileMenu(
+                            title: 'Followings',
+                            icon: Icons.people,
+                            tabIndex: 1),
+                        _buildListTileMenu(
+                            title: 'Followers',
+                            icon: Icons.groups,
+                            tabIndex: 2),
+                        ListTile(
+                          title: Text(
+                            'Logout',
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.headline1!.color,
+                            ),
+                          ),
+                          leading: Icon(
+                            Icons.logout,
+                            color: Theme.of(context).textTheme.headline1!.color,
+                          ),
+                          onTap: () {
+                            Get.defaultDialog(
+                                content: Text('Do you wanna to logout!',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    )),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      child: Text('Cancel',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                          ))),
+                                  TextButton(
+                                      onPressed: () {
+                                        controller.logout();
+                                        Get.offAndToNamed(Routes.USERSTATE);
+                                      },
+                                      child: Text('Confirm')),
+                                ]);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            ),
-          ],
-        ),
-      ]),
-    );
+            ]),
+          );
+        });
   }
 }

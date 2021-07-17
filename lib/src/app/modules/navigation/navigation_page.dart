@@ -11,7 +11,7 @@ class Navigationpage extends StatefulWidget {
 }
 
 class _NavigationpageState extends State<Navigationpage> {
-  int _currentIndex = 4;
+  int _currentIndex = 0;
   List<Map<String, dynamic>> _pages = [];
 
   void _selectedPage(int index) {

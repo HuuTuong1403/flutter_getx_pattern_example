@@ -30,6 +30,7 @@ dependencies:
   firebase_auth: ^2.0.0
   firebase_core: ^1.3.0
   firebase_storage: ^9.0.0
+  flutter_facebook_login: ^3.0.0
   flutter_native_splash: ^1.2.0
   flutter_svg: ^0.22.0
   flutter_swiper: ^1.1.6
@@ -37,6 +38,7 @@ dependencies:
   font_awesome_flutter: ^9.1.0
   get: ^4.1.4
   get_storage: ^2.0.2
+  google_sign_in: ^5.0.4
   http: ^0.13.3
   image_picker: ^0.8.1+3
   permission_handler: ^8.1.2

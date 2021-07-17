@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_pattern/src/app/data/repository/authentication_respository.dart';
+import 'package:flutter_getx_pattern/src/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class LogInPageController extends GetxController {
@@ -31,6 +32,18 @@ class LogInPageController extends GetxController {
       isLoading.value = false;
       return false;
     }
+  }
+
+  loginWithGoogle() async {
+    await repository.loginWithGoogle().then((value) {
+      Get.offAllNamed(Routes.USERSTATE);
+    });
+  }
+
+  logInWithFacebook() async {
+    await repository.logInWithFacebook().then((value) {
+      Get.offAllNamed(Routes.NAVIGATION);
+    });
   }
 
   validateEmail(v) => GetUtils.isEmail(v) ? null : 'Email is invalid';

@@ -242,14 +242,14 @@ class _LoginPageState extends State<LoginPage> {
                         context: context,
                         iconSvg: 'assets/svg/google_icon.svg',
                         fct: () {
-                          print('google');
+                          _.loginWithGoogle();
                         },
                       ),
                       buildIcon(
                         context: context,
                         iconSvg: 'assets/svg/facebook_icon.svg',
                         fct: () {
-                          print('facebook');
+                          _.logInWithFacebook();
                         },
                       ),
                       buildIcon(

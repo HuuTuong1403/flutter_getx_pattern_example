@@ -150,7 +150,7 @@ class _DetailBlogPageState extends State<DetailBlogPage> {
                             topLeft: Radius.circular(40),
                             topRight: Radius.circular(40)),
                         image: DecorationImage(
-                          image: AssetImage('assets/images/imageStories.png'),
+                          image: NetworkImage('${blog.image}'),
                           fit: BoxFit.cover,
                         ),
                       ),

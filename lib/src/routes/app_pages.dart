@@ -8,6 +8,7 @@ import 'package:flutter_getx_pattern/src/app/modules/menu/profile/profile_page.d
 import 'package:flutter_getx_pattern/src/app/modules/navigation/navigation_page.dart';
 import 'package:flutter_getx_pattern/src/app/modules/splash/splash_page.dart';
 import 'package:flutter_getx_pattern/src/app/modules/stories/stories_detail_page.dart';
+import 'package:flutter_getx_pattern/src/app/modules/user_state/user_state.dart';
 import 'package:get/get.dart';
 part './app_routes.dart';
 
@@ -30,7 +31,13 @@ class AppPages {
     GetPage(
       name: Routes.NAVIGATION,
       page: () => Navigationpage(),
-      children: [],
+      children: [
+        GetPage(
+          name: Routes.DETAILBLOG,
+          page: () => DetailBlogPage(),
+          children: [],
+        ),
+      ],
     ),
     GetPage(
       name: Routes.SIGNUP,
@@ -48,13 +55,13 @@ class AppPages {
       children: [],
     ),
     GetPage(
-      name: Routes.DETAILBLOG,
-      page: () => DetailBlogPage(),
+      name: Routes.PROFILE,
+      page: () => ProfilePage(),
       children: [],
     ),
     GetPage(
-      name: Routes.PROFILE,
-      page: () => ProfilePage(),
+      name: Routes.USERSTATE,
+      page: () => UserState(),
       children: [],
     ),
   ];

@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height *
-                              0.22 *
+                              0.24 *
                               _homeController.listBlog.length,
                           child: ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
