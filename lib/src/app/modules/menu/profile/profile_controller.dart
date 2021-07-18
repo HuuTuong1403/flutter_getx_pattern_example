@@ -9,10 +9,10 @@ class ProfileController extends GetxController {
   BlogRespository _respository = BlogRespository();
   UserRepository _userRepository = UserRepository();
   bool isLoading = true;
+
   List<Blog> listBlog = [];
   fetchBlogOfUser() async {
     listBlog = await _respository.fetchBlogOfUser();
-    isLoading = false;
     update();
   }
 

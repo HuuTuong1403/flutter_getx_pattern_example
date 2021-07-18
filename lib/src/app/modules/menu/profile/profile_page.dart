@@ -12,7 +12,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   int _tabIndex = Get.arguments[0]['tabIndex'];
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
@@ -343,9 +342,34 @@ class _ProfilePageState extends State<ProfilePage> {
                                 topRight: Radius.circular(30)),
                           ),
                           child: TabBarView(children: [
-                            MyPostWidget(),
-                            MyPostWidget(),
-                            MyPostWidget(),
+                            controller.listBlog.length == 0
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 30),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.checklist),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          'You don\'t have any blog',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .headline1!
+                                                .color,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : MyPostWidget(),
+                            Text('Tab 2'),
+                            Text('Tab 3'),
                           ]),
                         ),
                       ),

@@ -31,13 +31,7 @@ class AppPages {
     GetPage(
       name: Routes.NAVIGATION,
       page: () => Navigationpage(),
-      children: [
-        GetPage(
-          name: Routes.DETAILBLOG,
-          page: () => DetailBlogPage(),
-          children: [],
-        ),
-      ],
+      children: [],
     ),
     GetPage(
       name: Routes.SIGNUP,
@@ -52,6 +46,11 @@ class AppPages {
     GetPage(
       name: Routes.MENU,
       page: () => MenuPage(),
+      children: [],
+    ),
+    GetPage(
+      name: Routes.DETAILBLOG,
+      page: () => DetailBlogPage(),
       children: [],
     ),
     GetPage(

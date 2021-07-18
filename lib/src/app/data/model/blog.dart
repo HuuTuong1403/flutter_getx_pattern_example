@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Blog {
   final String id;
   final String title;
@@ -8,6 +10,8 @@ class Blog {
   final String image;
   final String userId;
   final String tags;
+  final String categoriesName;
+  final Timestamp createAt;
 
   Blog({
     required this.id,
@@ -17,6 +21,8 @@ class Blog {
     required this.image,
     required this.userId,
     required this.tags,
+    required this.categoriesName,
+    required this.createAt,
   });
 
   Blog copyWith({
@@ -27,6 +33,8 @@ class Blog {
     String? image,
     String? userId,
     String? tags,
+    String? categoriesName,
+    Timestamp? createAt,
   }) {
     return Blog(
       id: id ?? this.id,
@@ -36,6 +44,8 @@ class Blog {
       image: image ?? this.image,
       userId: userId ?? this.userId,
       tags: tags ?? this.tags,
+      categoriesName: categoriesName ?? this.categoriesName,
+      createAt: createAt ?? this.createAt,
     );
   }
 
@@ -48,6 +58,8 @@ class Blog {
       'image': image,
       'userId': userId,
       'tags': tags,
+      'categoriesName': categoriesName,
+      'createAt': createAt,
     };
   }
 
@@ -60,6 +72,8 @@ class Blog {
       image: map['image'],
       userId: map['userId'],
       tags: map['tags'],
+      categoriesName: map['categoriesName'],
+      createAt: map['createAt'],
     );
   }
 
@@ -69,7 +83,7 @@ class Blog {
 
   @override
   String toString() {
-    return 'Blog(id: $id, title: $title, subTitle: $subTitle, content: $content, image: $image, userId: $userId, tags: $tags)';
+    return 'Blog(id: $id, title: $title, subTitle: $subTitle, content: $content, image: $image, userId: $userId, tags: $tags, categoriesName: $categoriesName, createAt: $createAt)';
   }
 
   @override
@@ -83,7 +97,9 @@ class Blog {
         other.content == content &&
         other.image == image &&
         other.userId == userId &&
-        other.tags == tags;
+        other.tags == tags &&
+        other.categoriesName == categoriesName &&
+        other.createAt == createAt;
   }
 
   @override
@@ -94,6 +110,8 @@ class Blog {
         content.hashCode ^
         image.hashCode ^
         userId.hashCode ^
-        tags.hashCode;
+        tags.hashCode ^
+        categoriesName.hashCode ^
+        createAt.hashCode;
   }
 }

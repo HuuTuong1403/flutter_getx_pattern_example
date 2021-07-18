@@ -28,6 +28,8 @@ class BlogRespository {
         'blogTags': blogTags,
         'blogContent': blogContent,
         'blogImage': blogImage,
+        'categoriesName': 'Technology',
+        'createAt': Timestamp.now(),
         'userId': _uid,
       });
       return 'success';
@@ -43,18 +45,28 @@ class BlogRespository {
         _listBlog.insert(
           0,
           Blog(
-            id: item.get('blogId'),
-            title: item.get('blogTitle'),
-            subTitle: item.get('blogSubTitle'),
-            content: item.get('blogContent'),
-            image: item.get('blogImage'),
-            userId: item.get('userId'),
-            tags: item.get('blogTags'),
-          ),
+              id: item.get('blogId'),
+              title: item.get('blogTitle'),
+              subTitle: item.get('blogSubTitle'),
+              content: item.get('blogContent'),
+              image: item.get('blogImage'),
+              userId: item.get('userId'),
+              tags: item.get('blogTags'),
+              categoriesName: item.get('categoriesName'),
+              createAt: item.get('createAt')),
         );
       });
     });
     return _listBlog;
+  }
+
+  
+  Future getDataUserOfBlog(String uid) async {
+    final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .get();
+    return userDoc;
   }
 
   Future<List<Blog>> fetchBlogOfUser() async {

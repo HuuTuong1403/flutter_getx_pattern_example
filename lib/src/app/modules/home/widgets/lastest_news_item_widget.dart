@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_pattern/src/app/data/model/blog.dart';
 import 'package:flutter_getx_pattern/src/routes/app_pages.dart';
@@ -13,6 +14,30 @@ class LastestNewsItemWidget extends StatefulWidget {
 }
 
 class _LastestNewsItemWidgetState extends State<LastestNewsItemWidget> {
+  String timeAgo = '';
+  changeTime() {
+    var t = widget.blog.createAt;
+    var now = Timestamp.now();
+    var time = ((now.seconds - t.seconds) / 60).ceil();
+    if (time < 60) {
+      timeAgo = '${time}m ago';
+    } else {
+      time = (time / 60).ceil();
+      if (time < 24) {
+        timeAgo = '${time}hr ago';
+      } else {
+        time = (time / 24).ceil();
+        timeAgo = '${time}day ago';
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    changeTime();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +58,7 @@ class _LastestNewsItemWidgetState extends State<LastestNewsItemWidget> {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            Get.toNamed(Routes.DETAILBLOG, arguments: [widget.blog]);
+            Get.toNamed(Routes.DETAILBLOG, arguments: [widget.blog, timeAgo]);
           },
           splashColor: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(16),
@@ -115,7 +140,7 @@ class _LastestNewsItemWidgetState extends State<LastestNewsItemWidget> {
                                       .color),
                               const SizedBox(width: 5),
                               Text(
-                                '1hr ago',
+                                '$timeAgo',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Theme.of(context)
