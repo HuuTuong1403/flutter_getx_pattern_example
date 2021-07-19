@@ -1,4 +1,4 @@
-import 'package:flutter_getx_pattern/src/app/data/repository/user_respository.dart';
+import 'package:flutter_getx_pattern/src/app/data/repository/user_repository.dart';
 import 'package:get/get.dart';
 
 class MenuController extends GetxController {

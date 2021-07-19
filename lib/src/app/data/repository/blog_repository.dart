@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_getx_pattern/src/app/data/model/blog.dart';
 import 'package:uuid/uuid.dart';
 
-class BlogRespository {
+class BlogRepository {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future uploadBlog(String blogTitle, String blogSubTitle, String blogTags,

@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_pattern/src/app/data/model/blog.dart';
-import 'package:flutter_getx_pattern/src/app/data/repository/blog_respository.dart';
+import 'package:flutter_getx_pattern/src/app/data/repository/blog_repository.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class UploadBlogController extends GetxController {
-  BlogRespository _respository = BlogRespository();
+  BlogRepository _respository = BlogRepository();
   //Pick Image use library image_picker from pub.dev
   File? image;
   final picker = ImagePicker();

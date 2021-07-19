@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_getx_pattern/src/app/data/model/user_local.dart';
-import 'package:flutter_getx_pattern/src/app/data/repository/blog_respository.dart';
+import 'package:flutter_getx_pattern/src/app/data/repository/blog_repository.dart';
 import 'package:get/get.dart';
 
 class DetailBlogController extends GetxController {
-  BlogRespository _blogRespository = BlogRespository();
+  BlogRepository _blogRespository = BlogRepository();
   bool isLoading = true;
   UserLocal? user;
   getDataOfUser(String uid) async {

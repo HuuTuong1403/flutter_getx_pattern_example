@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_getx_pattern/src/app/modules/home/home_page.dart';
 import 'package:flutter_getx_pattern/src/app/modules/menu/menu_page.dart';
 import 'package:flutter_getx_pattern/src/app/modules/blog/upload_blog/upload_blog_page.dart';
+import 'package:flutter_getx_pattern/src/app/modules/search/search_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Navigationpage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _NavigationpageState extends State<Navigationpage> {
       {'page': HomePage()},
       {'page': HomePage()},
       {'page': UploadBlogPage()},
-      {'page': HomePage()},
+      {'page': SearchPage()},
       {'page': MenuPage()},
     ];
   }

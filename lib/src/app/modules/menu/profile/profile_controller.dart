@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_getx_pattern/src/app/data/model/blog.dart';
 import 'package:flutter_getx_pattern/src/app/data/model/user_local.dart';
-import 'package:flutter_getx_pattern/src/app/data/repository/blog_respository.dart';
-import 'package:flutter_getx_pattern/src/app/data/repository/user_respository.dart';
+import 'package:flutter_getx_pattern/src/app/data/repository/blog_repository.dart';
+import 'package:flutter_getx_pattern/src/app/data/repository/user_repository.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
-  BlogRespository _respository = BlogRespository();
+  BlogRepository _respository = BlogRepository();
   UserRepository _userRepository = UserRepository();
   bool isLoading = true;
 
